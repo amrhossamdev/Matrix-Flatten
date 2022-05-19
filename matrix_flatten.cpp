@@ -2,12 +2,11 @@
 
 using namespace std;
 
-
 int main() {
     /*
      * n -> total number of 2d arrays ( block size )
-     * m -> row
-     * p -> col
+     * m -> row size
+     * p -> col size
     */
     int n, m, p;
     cout << "Enter block size(n) = " << endl;
@@ -28,17 +27,22 @@ int main() {
     cout << "Result :" << endl;
     int q = n * m * p; // size of 1d vector
     int v[q];
-    //traversing 3d array
-    //time complexity o(1) for converting 3d to 1d & O(n*m*p) == o(N) for traversing
-    //space complexity o(n)
+
+    /*traversing 3d array
+    time complexity o(1) for converting 3d to 1d & O(n*m*p) == o(N) for traversing
+    space complexity o(n)*/
+
+    /* 2d array idx = width * row + col
+     3d array idx = (width * height * i) + [2d array idx]*/
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
             for (int k = 0; k < p; ++k) {
-                int idx = (i * m * p) + (j * p) + k; // takes o(1) to generate 1d vector indexes
-                v[idx] = matrix[i][j][k];// assigning takes o(1)
+                int idx = (m * p * i) + (m * j) + k; //getting 1d vector idx in o(1)
+                v[idx] = matrix[i][j][k]; // assigning takes o(1)
             }
         }
     }
+    //printing 1d array
     for (int y = 0; y < q; ++y) { cout << v[y] << " "; }
     return 0;
 }
